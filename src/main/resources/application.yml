@@ -1,0 +1,83 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: vault-management-system
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5432/vault_db
+    username: ${DB_USERNAME:vault_user}
+    password: ${DB_PASSWORD:vault_password}
+    driver-class-name: org.postgresql.Driver
+    
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+
+# Security Configuration
+vault:
+  security:
+    jwt:
+      secret: ${JWT_SECRET:mySecretKey12345678901234567890}
+      expiration: 86400000 # 24 hours
+    encryption:
+      key: ${ENCRYPTION_KEY:myEncryptionKey1234567890123456}
+    rate-limit:
+      requests-per-minute: 60
+      
+# Logging
+logging:
+  level:
+    com.vaultsystem: DEBUG
+    org.springframework.security: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/vault-system.log
+
+# API Documentation
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+
+# Actuator
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: when-authorized
+
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  h2:
+    console:
+      enabled: true

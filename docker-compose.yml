@@ -1,0 +1,42 @@
+version: '3.8'
+
+services:
+  vault-db:
+    image: postgres:15
+    container_name: vault-postgres
+    environment:
+      POSTGRES_DB: vault_db
+      POSTGRES_USER: vault_user
+      POSTGRES_PASSWORD: vault_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - vault_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - vault-network
+
+  vault-app:
+    build: .
+    container_name: vault-app
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+      - DB_USERNAME=vault_user
+      - DB_PASSWORD=vault_password
+      - JWT_SECRET=mySecretKey12345678901234567890123456789012
+      - ENCRYPTION_KEY=myEncryptionKey1234567890123456
+    depends_on:
+      - vault-db
+    networks:
+      - vault-network
+    volumes:
+      - ./logs:/app/logs
+
+volumes:
+  vault_data:
+
+networks:
+  vault-network:
+    driver: bridge
