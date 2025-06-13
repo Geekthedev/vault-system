@@ -291,7 +291,7 @@ Spring Boot Actuator provides metrics endpoints:
 
 ## License
 
-This project is licensed under the Open Source License 
+This project is licensed Open Source 
 
 ## Support
 
