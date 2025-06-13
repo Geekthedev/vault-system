@@ -4,7 +4,7 @@ A secure, encrypted vault system for managing API keys, tokens, secrets, and env
 
 ## Features
 
-### 🔐 Security
+###  Security
 - **JWT Authentication** with role-based access control (Admin/User)
 - **AES-256 Encryption** for all stored secrets
 - **BCrypt Password** hashing with salt
@@ -12,21 +12,21 @@ A secure, encrypted vault system for managing API keys, tokens, secrets, and env
 - **Comprehensive audit logging** with IP tracking
 - **Secure headers** (CORS, HSTS, CSP)
 
-### 🗄️ Vault Management
+### Vault Management
 - Store API keys, tokens, passwords, database URLs, SSH keys, certificates
 - **Metadata tagging** with project names, environments, and custom tags
 - **Search and filter** by project, type, keyword, or date
 - **Encrypted storage** with secure retrieval
 - **Access tracking** with last accessed timestamps
 
-### 📊 Audit & Monitoring
+###  Audit & Monitoring
 - **Complete audit trail** of all user activities
 - **IP address tracking** and user agent logging
 - **Paginated log retrieval** with filtering capabilities
 - **Failed login attempt tracking** with account locking
 - **Scheduled reporting** (planned feature)
 
-### 🔄 Export & Integration
+###  Export & Integration
 - **Export vault data** in CSV and JSON formats
 - **RESTful API** with comprehensive OpenAPI/Swagger documentation
 - **Bulk operations** for managing multiple secrets
@@ -291,7 +291,7 @@ Spring Boot Actuator provides metrics endpoints:
 
 ## License
 
-This project is licensed under the Open Source License - see the LICENSE file for details.
+This project is licensed under the Open Source License 
 
 ## Support
 
